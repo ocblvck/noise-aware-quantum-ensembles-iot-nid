@@ -233,6 +233,10 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Floor-referenced gate, cost-weight sensitivity | `analyze_revision_scope.py` | `corrected/absolute_floor_gate_all.json`, `corrected/cost_weight_sensitivity_corrected.json` |
 | Reward-loop rescoring | `rescore_reward_loop.py` | `reward_loop_rescoring.json`, `corrected/rescoring_*.json` (only the `"42"` block is the subsample the policies saw) |
 | Accuracy-weighting probe | `probe_qwe_weights.py` | `corrected/qwe_weight_probe.json` |
+| Overlap of reward-loop records with evaluation splits (Section 10.2) | `freeze_revision_config.py` | `corrected/reward_eval_overlap.json` |
+| State fidelity of the linear ZZ variant against the full map (Section 6.2) | `eval_lrsweep.py` | `eval_lrsweep_UNSW_NB15.json` |
+| Submitted policies at the full protocol (Appendix A) | `eval_compression_matched.py` on `results/replicate_circuits/` | `corrected/compression_matched_precorrection_{IoT,UNSW,Bot}.json` |
+| Submitted version's compression arms and transpiler control (Section 6, Appendix A) | `eval_compression_matched.py` | `compression_matched_cmp{IoT,UNSW,Bot}.json` |
 | Supplement tables as LaTeX and statistics | `scripts/analyze_supplement.py` | `supplement/summary_supplement.json`, `supplement/tex/*.tex` |
 | Manuscript tables as LaTeX | `scripts/make_revision_tables.py` | `corrected/tex/*.tex` |
 | Whole campaigns, unattended | `scripts/run_revision.sh`, `scripts/run_supplement.sh` | `results/corrected/`, `results/supplement/` (protocols frozen before launch) |
