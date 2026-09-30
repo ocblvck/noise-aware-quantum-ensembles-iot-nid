@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this code, circuits or results, please cite the article below. It is under revision at SN Computer Science; until it appears, cite it as under review and also cite the published DCAS 2026 paper it extends (doi 10.1109/DCAS69364.2026.11544356)."
+title: "Noise-aware quantum ensembles and learned feature-map compression (taqcc)"
+type: software
+authors:
+  - family-names: Okekeogbu
+    given-names: Chibuike C.
+    affiliation: "North Carolina Agricultural and Technical State University"
+repository-code: "https://github.com/ocblvck/task-aware-qcc"
+license: MIT
+preferred-citation:
+  type: unpublished
+  title: "Noise-Aware Fusion of Quantum Kernel Ensembles for IoT Intrusion Detection"
+  authors:
+    - family-names: Okekeogbu
+      given-names: Chibuike C.
+    - family-names: Mostafa
+      given-names: Sayed A.
+    - family-names: Patooghy
+      given-names: Ahmad
+  year: 2026
+  notes: "Under revision at SN Computer Science (special issue arising from the AQ-QCAS workshop at DCAS 2026); extended version of the DCAS 2026 paper."

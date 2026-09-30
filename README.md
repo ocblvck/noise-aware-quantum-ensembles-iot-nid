@@ -316,3 +316,24 @@ results/            see section 3
 - **Archive.** The state reported in the revised article is tagged `v1.1-revision`. A
   permanent archive of that tag is planned (Zenodo). No DOI exists yet, and none is
   claimed until it does.
+
+## Citation
+
+If you use this repository, cite the associated article. It is under revision at SN
+Computer Science; until it appears, cite it as:
+
+C. C. Okekeogbu, S. A. Mostafa, and A. Patooghy, "Noise-Aware Fusion of Quantum Kernel
+Ensembles for IoT Intrusion Detection," under review, SN Computer Science, 2026.
+
+Also cite the published conference paper it extends:
+
+C. C. Okekeogbu, S. A. Mostafa, and A. Patooghy, "Novel Quantum Ensemble Machine
+Learning Models for IoT Intrusion Detection," in 2026 IEEE 19th Dallas Circuits and
+Systems Conference (DCAS), 2026, pp. 1-6, doi: 10.1109/DCAS69364.2026.11544356.
+
+A machine-readable citation is in `CITATION.cff`.
+
+## License
+
+Code, emitted circuits and result files are released under the MIT License; see
+`LICENSE`. The datasets are subject to their original authors' terms.
