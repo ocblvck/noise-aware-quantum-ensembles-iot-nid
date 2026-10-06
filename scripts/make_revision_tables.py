@@ -72,7 +72,7 @@ for lr,lrtex in LRS:
         pb.append("GRPO %s & %d & $%s$ & $%d$ & $%.1f\\%%$ & $%d$ & %s \\\\" % (lrtex, s, g2, v["total_2q"], v["reduction_pct"], v["distinct_members"], ecell))
 w("table2_pre.tex", r"""\begin{table}[t]
 \centering
-\caption{The policies of the submitted version, trained against the structural criterion
+\caption{The earlier policies, trained against the structural criterion
 alone with an accuracy-retention reward on a 16/8 subsample (sixteen training and eight
 test records), and audited after training with \eqref{eq:effective}. The seed-43 policy at the lowest rate is the one that satisfied the
 structural criterion while leaving ten of eighteen parameters inert.}
