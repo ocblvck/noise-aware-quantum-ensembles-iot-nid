@@ -22,7 +22,7 @@ from pathlib import Path
 RESULTS = Path(__file__).resolve().parents[1] / "results"
 TOL = 0.0006  # printed to three decimals
 
-FUSION6Q = {  # Table 4, coupled family p2 = 10 p1, six qubits
+FUSION6Q = {  # Table 2 of the revised article (Table 4 of the submitted version), coupled family p2 = 10 p1, six qubits
     "IoTID20": ("fusion_v2_IoT_Orig.json", "IoT_Original_Distribution.csv", {
         #        QVE3   QWE3   NWE3  |   Z      ZZ    Pauli
         "0.0":  (0.675, 0.675, 0.675, 0.548, 0.662, 0.675),
@@ -44,14 +44,14 @@ FUSION6Q = {  # Table 4, coupled family p2 = 10 p1, six qubits
         "0.1":  (0.000, 0.000, 0.820, 0.820, 0.000, 0.000)}),
 }
 
-TAU = {  # Table 5, NWE3 against the gate threshold, IoTID20
+TAU = {  # Table 6 of the revised article (Table 5 of the submitted version), NWE3 against the gate threshold, IoTID20
     "0.0":  (0.675, 0.675, 0.675, 0.675, 0.675),
     "0.01": (0.428, 0.546, 0.546, 0.546, 0.546),
     "0.1":  (0.514, 0.514, 0.514, 0.514, 0.514),
 }
 TAUS = ["0.01", "0.02", "0.05", "0.1", "0.2"]
 
-REALISTIC = {  # Table 6, p1 = 5e-4, UNSW-NB15
+REALISTIC = {  # Table 7 of the revised article (Table 6 of the submitted version), p1 = 5e-4, UNSW-NB15
     8:  ("fusion_realistic_8q.json", {
         "0.0:0.0":    (0.639, 0.639, 0.639, 0.638, 0.616, 0.652),
         "0.0005:0.01": (0.600, 0.600, 0.600, 0.639, 0.553, 0.590),
@@ -62,7 +62,7 @@ REALISTIC = {  # Table 6, p1 = 5e-4, UNSW-NB15
         "0.0005:0.02": (0.484, 0.571, 0.649, 0.649, 0.000, 0.448)}),
 }
 
-STRUCTURE = {  # Table 2, total two-qubit gates / distinct members / effective params
+STRUCTURE = {  # Table A2 of the revised article (Table 2 of the submitted version), total two-qubit gates / distinct members / effective params
     "grpo_fix_lr5":  (20, 2, 18),
     "grpo_fix_lr75": (0,  1, 18),
     "grpo_fix_lr10": (90, 3, 18),
@@ -72,13 +72,13 @@ STRUCTURE = {  # Table 2, total two-qubit gates / distinct members / effective p
     "sft_warmup":    (30, 3, 18),
 }
 
-AGREEMENT = {  # Table 8, Yule's Q per pair, then majority / best / oracle
+AGREEMENT = {  # Table 10 of the revised article (Table 8 of the submitted version), Yule's Q per pair, then majority / best / oracle
     "IoT_Original_Distribution.csv":         (0.850, 0.935, 0.998, 0.675, 0.682, 0.802),
     "UNSW_NB15.csv":                         (0.921, 0.944, 0.993, 0.667, 0.685, 0.773),
     "UNSW_2018_IoT_Botnet_Final_10_Best.csv": (0.951, 0.976, 0.999, 0.846, 0.878, 0.928),
 }
 
-CLASSICAL = {  # Table 9, mean MCC over five seeds
+CLASSICAL = {  # Table 11 of the revised article (Table 9 of the submitted version), mean MCC over five seeds
     "RandomForest":       (0.697, 0.710, 0.853),
     "SVM_RBF":            (0.515, 0.650, 0.827),
     "LogisticRegression": (0.462, 0.557, 0.838),
@@ -131,7 +131,7 @@ def check_corrected(c):
             c.eq(f"T2c {n} total", v["total_2q"], int(tot), 0)
             c.eq(f"T2c {n} distinct", v["distinct_members"], int(dist), 0)
             c.eq(f"T2c {n} effective", sum(eff[f"{n}__{t}"]["effective"] for t in ("Z_1_full", "ZZ_2_full", "Pauli_1_full")), int(e), 0)
-        print(f"Table 2 (corrected)  {len(rows)} policies checked against structure.json and effective_params.json")
+        print(f"Table 12 (corrected policies)  {len(rows)} policies checked against structure.json and effective_params.json")
     for tag, dsf in (("IoT", "IoT_Original_Distribution.csv"), ("UNSW", "UNSW_NB15.csv"), ("Bot", "UNSW_2018_IoT_Botnet_Final_10_Best.csv")):
         b = c.load(f"corrected/compression_matched_corrected_{tag}.json")
         if not b: continue
@@ -140,7 +140,7 @@ def check_corrected(c):
             for arm in ("uncompressed", "linear"):
                 for r in ("QVE3", "NWE3"):
                     c.eq(f"T3c {tag} {arm} {nk} {r} n_splits", len(bn[nk][arm]["fusion"][r]["mcc_seeds"]), 5, 0)
-    print("Table 3 (corrected)  split counts checked")
+    print("Tables 14 and 15 (corrected downstream)  split counts checked")
     # realistic family and tau sweep at 8 and 10 qubits: every printed cell against its JSON
     files = {(8, "UNSW-NB15"): "fusion_realistic_8q.json", (10, "UNSW-NB15"): "fusion_realistic_10q.json",
              (8, "IoTID20"): "corrected/fusion_realistic_8q_IoT.json", (10, "IoTID20"): "corrected/fusion_realistic_10q_IoT.json",
@@ -203,7 +203,7 @@ def check_corrected(c):
             c.eq(f"S3 s{m.group(1)} total", v["total_2q"], int(m.group(5)), 0); c.eq(f"S3 s{m.group(1)} reduction", v["reduction_pct"], float(m.group(6)), 0.06); n += 3
         print(f"table_s3_structure.tex  {n} cells checked")
 
-    # Table 10 (fifteen-split ten-qubit comparison): exact tests with ties dropped, stored by
+    # Table 9 of the revised article (fifteen-split ten-qubit comparison): exact tests with ties dropped, stored by
     # scripts/exact_tenq_tests.py; the merged file keeps the zero-split variant computed at run time
     ex = c.load("corrected/tenq15_exact_tests.json")
     if ex:
@@ -213,7 +213,7 @@ def check_corrected(c):
             r = ex[blk][cmp_]
             c.eq(f"T10 {blk} {cmp_} delta", r["mean_delta"], md); c.eq(f"T10 {blk} {cmp_} p", r["p_exact_ties_dropped"], p, 0.0006)
             c.eq(f"T10 {blk} {cmp_} holm", r["p_holm"], ph, 0.0006); c.eq(f"T10 {blk} {cmp_} wtl", (r["wins"], r["ties"], r["losses"]) == (w, t, l), True, 0)
-        print("Table 10 (exact tests)  16 values checked")
+        print("Table 9 (exact tests)  16 values checked")
 
 
 def main():
@@ -223,7 +223,7 @@ def main():
     args = ap.parse_args()
     c = Check(args.verbose)
 
-    print("Table 2  committee structure and effective parameters")
+    print("Table A2  committee structure and effective parameters of the earlier policies")
     struct = c.load("replicates_structure.json")
     eff = c.load("effective_params.json")
     if struct and eff:
@@ -235,7 +235,7 @@ def main():
             if got:
                 c.eq(f"T2 {model} effective", got, effective, 0)
 
-    print("Tables 4 and 5  fusion under the coupled family, six qubits")
+    print("Tables 2 and 6  fusion under the coupled family, six qubits")
     for ds, (fname, dskey, rows) in FUSION6Q.items():
         blob = c.load(fname)
         if not blob:
@@ -252,7 +252,7 @@ def main():
                     c.eq(f"T5 {ds} p1={p1} tau={tau}",
                          bn[p1]["fusion"][f"NWE3@{tau}"]["mcc_mean"], w)
 
-    print("Table 6  hardware-realistic noise, UNSW-NB15")
+    print("Table 7  hardware-realistic noise, UNSW-NB15")
     for width, (fname, rows) in REALISTIC.items():
         blob = c.load(fname)
         if not blob:
@@ -264,7 +264,7 @@ def main():
             for name, g, w in zip(RULES + BRANCHES, got, vals):
                 c.eq(f"T6 {width}q {nk} {name}", g, w)
 
-    print("Table 7  fifteen paired splits at ten qubits")
+    print("Table 9  fifteen paired splits at ten qubits")
     m = c.load("fusion_10q_merged15.json")
     if m:
         c.eq("T7 n seeds", m["n"], 15, 0)
@@ -277,7 +277,7 @@ def main():
         c.eq("T7 vs QVE3 losses", t["losses"], 0, 0)
         c.eq("T7 vs QVE3 p_holm", t["p_holm"], 0.0024, 0.00005)
 
-    print("Table 8  member agreement and the oracle ceiling")
+    print("Table 10  member agreement and the oracle ceiling")
     a = c.load("member_agreement.json")
     if a:
         for dskey, vals in AGREEMENT.items():
@@ -289,7 +289,7 @@ def main():
                                   vals[3:], ["majority", "best", "oracle"]):
                 c.eq(f"T8 {dskey[:12]} {nm}", r[key], w)
 
-    print("Table 9  classical reference point")
+    print("Table 11  classical reference point")
     cb = c.load("classical_baseline_200.json")
     if cb:
         for model, vals in CLASSICAL.items():
