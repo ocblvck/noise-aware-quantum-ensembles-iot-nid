@@ -2,7 +2,7 @@
 """Build the four figures for the SN Computer Science manuscript.
 
 Every number here is transcribed from the tables in `Okekeogbu_manuscript.tex`, which are in
-turn generated from the JSON files in `task-aware-qcc/results/`. The `--check` flag
+turn generated from the JSON files in `results/`. The `--check` flag
 re-reads those JSONs and asserts the hard-coded values still match, so a figure cannot
 silently drift away from the text.
 

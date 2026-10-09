@@ -6,7 +6,7 @@ authors:
   - family-names: Okekeogbu
     given-names: Chibuike C.
     affiliation: "North Carolina Agricultural and Technical State University"
-repository-code: "https://github.com/ocblvck/task-aware-qcc"
+repository-code: "https://github.com/ocblvck/noise-aware-quantum-ensembles-iot-nid"
 license: MIT
 preferred-citation:
   type: unpublished
