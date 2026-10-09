@@ -44,7 +44,7 @@ FUSION6Q = {  # Table 2 of the revised article (Table 4 of the submitted version
         "0.1":  (0.000, 0.000, 0.820, 0.820, 0.000, 0.000)}),
 }
 
-TAU = {  # Table 6 of the revised article (Table 5 of the submitted version), NWE3 against the gate threshold, IoTID20
+TAU = {  # Table 5 of the revised article (Table 5 of the submitted version), NWE3 against the gate threshold, IoTID20
     "0.0":  (0.675, 0.675, 0.675, 0.675, 0.675),
     "0.01": (0.428, 0.546, 0.546, 0.546, 0.546),
     "0.1":  (0.514, 0.514, 0.514, 0.514, 0.514),
@@ -235,7 +235,7 @@ def main():
             if got:
                 c.eq(f"T2 {model} effective", got, effective, 0)
 
-    print("Tables 2 and 6  fusion under the coupled family, six qubits")
+    print("Tables 2 and 5  fusion under the coupled family, six qubits")
     for ds, (fname, dskey, rows) in FUSION6Q.items():
         blob = c.load(fname)
         if not blob:

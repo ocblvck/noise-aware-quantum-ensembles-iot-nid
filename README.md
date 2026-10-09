@@ -221,8 +221,8 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Tables 14 and 15, downstream compression | `eval_compression_matched.py` (see 9) | `corrected/compression_matched_corrected_{IoT,UNSW,Bot}.json` |
 | Table 2, Fig. 2 a to c, six-qubit fusion | `eval_fusion_full.py --datasets <csv> --num-qubits 6 --seeds 0,1,2,3,4 --output results/fusion_v2_<tag>.json` | `fusion_v2_IoT_Orig.json`, `fusion_v2_UNSW_NB1.json`, `fusion_v2_UNSW_201.json` |
 | Table 3, C sweep | same script with `--noise-grid 0.0,0.002,0.005,0.01 --no-ablation --c-values 0.1,1,10,100` | `corrected/c_sweep_{IoT,UNSW,Bot}.json` |
-| Table 5, tau at eight and ten qubits; Table 7, Fig. 2 d, realistic family | same script with `--num-qubits 8` or `10 --noise-pairs 0.0:0.0,0.0005:0.01,0.0005:0.02 --no-ablation --resume` | `fusion_realistic_{8q,10q}.json` (UNSW-NB15), `corrected/fusion_realistic_{8q,10q}_{IoT,Bot}.json` |
-| Table 6, tau at six qubits | same runs as Table 2 (`NWE3@<tau>` keys) | as Table 2 |
+| Table 6, tau at eight and ten qubits; Table 7, Fig. 2 d, realistic family | same script with `--num-qubits 8` or `10 --noise-pairs 0.0:0.0,0.0005:0.01,0.0005:0.02 --no-ablation --resume` | `fusion_realistic_{8q,10q}.json` (UNSW-NB15), `corrected/fusion_realistic_{8q,10q}_{IoT,Bot}.json` |
+| Table 5, tau at six qubits | same runs as Table 2 (`NWE3@<tau>` keys) | as Table 2 |
 | Table 8, device-derived noise models | `eval_fusion_full.py ... --device-noise <snapshot> --no-ablation` for each of six snapshots | `supplement/fusion_6q_<snapshot>_{IoT,UNSW,Bot}.json`, metadata in `supplement/device_snapshots.json` |
 | Table 4, six-qubit confirmation splits 5 to 14 | `eval_fusion_full.py ... --seeds 5,...,14 --noise-grid 0.0,0.002,0.005,0.01,0.03,0.05,0.1 --no-ablation` | `supplement/fusion_6q_splits5to14_{IoT,UNSW,Bot}.json` |
 | Table 9, fifteen splits at ten qubits | three runs merged; exact tests by `exact_tenq_tests.py` | `fusion_10q_merged15.json` (its `source_files` key), `fusion_10q_confirmatory10.json`, `corrected/tenq15_exact_tests.json` |
