@@ -52,7 +52,7 @@ generated directly from JSON by `make_revision_tables.py`, which is the check fo
 | Directory | Status | What it is |
 |---|---|---|
 | `results/*.json` | original | results of the submitted version (August 2026). Never overwritten |
-| `results/replicate_circuits/` | original, historical | circuits of the submitted policies, including the one that gamed the structural criterion |
+| `results/replicate_circuits/` | original, historical | circuits of the earlier (submitted-version) policies, including the one that gamed the structural criterion |
 | `results/corrected/` | corrected, primary | revision campaign (September 2026): fifteen policies trained with the effective-parameter test inside the loop and MCC retention; C sweep; eight and ten qubits on all datasets |
 | `results/supplement/` | supplemental | run after the final audit: six-qubit grid on data splits 5 to 14, device-derived noise models, and policies whose reward subsample is seeded by the training seed. Protocol frozen before launch in `results/supplement/PROTOCOL.md` |
 | `results/manifests/` | reference | dataset checksums and hashes of every train/test split |
@@ -101,7 +101,7 @@ its weights from a stratified 20 percent split of the training partition. `C = 1
 on a test partition.
 
 Seeds. Data-split seeds 0 to 4 everywhere; 5 to 14 additionally for UNSW-NB15 at ten
-qubits and, in the supplement, for the six-qubit grid. Policy training seeds 42 to 46.
+qubits and, for the six-qubit grid of Table 4, on all three datasets. Policy training seeds 42 to 46.
 Policy seeds and data splits are never pooled.
 
 ## 5. Models
@@ -115,7 +115,7 @@ Policy seeds and data splits are never pooled.
   and no shot noise. Noiseless kernels use the exact statevector path.
 - **Noise.** (a) Coupled depolarizing family, `p2 = 10 p1`, at six qubits. (b) Realistic
   depolarizing family, `p1 = 5e-4`, `p2` in 0.01, 0.02, plus a noiseless run, at eight and
-  ten qubits. (c) Supplement only: device-derived noise models from the calibration
+  ten qubits. (c) Device-derived noise models (Table 8; result files under results/supplement/) from the calibration
   snapshots of six seven-qubit IBM processors shipped with `qiskit-ibm-runtime` 0.42.0
   (`--device-noise fake_lagos` and similar). A snapshot noise model is not hardware
   execution.
@@ -123,10 +123,10 @@ Policy seeds and data splits are never pooled.
 - **Fusion rules** (`scripts/eval_fusion_full.py`). QVE3: majority vote. QWE3: weights
   proportional to validation accuracy. NWE3: members whose spread is at least `tau` times
   their noiseless spread vote equally; if none passes, the member with the largest spread
-  is kept. **Tie rule:** a weighted vote of exactly 0.5 goes to class 1, which is the
+  is kept. **Tie rule:** a tied vote (weight exactly 0.5) goes to class 1, which is the
   attack class on UNSW-NB15 and Bot-IoT and the normal class on IoTID20. This rule
   decides the three configurations in which NWE3 loses to majority voting.
-- **Metric.** Matthews correlation coefficient (scikit-learn). Statistics: exact
+- **Metric.** Matthews correlation coefficient (MCC) (scikit-learn). Statistics: exact
   two-sided Wilcoxon signed-rank test per noise level with tied pairs dropped, Holm
   correction within a dataset, no pooling across noise levels.
 
@@ -136,8 +136,8 @@ Policy: `Qwen2.5-Coder-3B-Instruct` with LoRA (rank 64, alpha 128, dropout 0.05)
 Stage 1, supervised warm-up (`scripts/train_sft_warmup.py`): targets are the
 linear-entanglement variant of each full-entanglement map. Stage 2, GRPO with the DAPO
 loss (`scripts/train_taskaware_grpo.py`): 250 steps, 8 completions per prompt,
-temperature 1.0, KL coefficient 0, batch 2 x 4 accumulation, constant learning rate after
-3 percent warm-up, learning rates 5e-6, 7.5e-6 and 1e-5. Prompt set: 8 source circuits at
+temperature 1.0, KL coefficient 0, batch 2 x 4 accumulation, constant learning rate after a
+3 percent learning-rate ramp, learning rates 5e-6, 7.5e-6 and 1e-5. Prompt set: 8 source circuits at
 six qubits, each repeated 8 times, 61 training prompts.
 
 Reward (`src/taqcc/reward.py`), clipped to [-1, 3]:
@@ -219,7 +219,7 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Table 12, Fig. 4, committee structure | `emit_replicate_circuits.py`, `audit_effective_params.py` (see 9) | `corrected/structure.json`, `corrected/effective_params.json`, `corrected/circuits/` |
 | Table 13, Table A3, reward-seeded committees | `train_taskaware_grpo.py ... --reward-seed <seed>` then emit, audit, `eval_compression_matched.py` | `supplement/structure_rs.json`, `effective_params_rs.json`, `compression_matched_rs_*.json` |
 | Tables 14 and 15, downstream compression | `eval_compression_matched.py` (see 9) | `corrected/compression_matched_corrected_{IoT,UNSW,Bot}.json` |
-| Table 2, Fig. 2 a to c, six-qubit fusion | `eval_fusion_full.py --datasets <csv> --num-qubits 6 --seeds 0,1,2,3,4 --output results/fusion_v2_<tag>.json` | `fusion_v2_IoT_Orig.json`, `fusion_v2_UNSW_NB1.json`, `fusion_v2_UNSW_201.json` |
+| Table 2, Fig. 2 a to c, six-qubit fusion | `eval_fusion_full.py --datasets <csv> --num-qubits 6 --seeds 0,1,2,3,4 --output results/fusion_v2_<tag>.json` | `fusion_v2_IoT_Orig.json`, `fusion_v2_UNSW_NB1.json`, `fusion_v2_UNSW_201.json` (IoTID20, UNSW-NB15, Bot-IoT; the Bot-IoT file carries the UNSW_2018 tag of its source CSV) |
 | Table 3, C sweep | same script with `--noise-grid 0.0,0.002,0.005,0.01 --no-ablation --c-values 0.1,1,10,100` | `corrected/c_sweep_{IoT,UNSW,Bot}.json` |
 | Table 6, tau at eight and ten qubits; Table 7, Fig. 2 d, realistic family | same script with `--num-qubits 8` or `10 --noise-pairs 0.0:0.0,0.0005:0.01,0.0005:0.02 --no-ablation --resume` | `fusion_realistic_{8q,10q}.json` (UNSW-NB15), `corrected/fusion_realistic_{8q,10q}_{IoT,Bot}.json` |
 | Table 5, tau at six qubits | same runs as Table 2 (`NWE3@<tau>` keys) | as Table 2 |
@@ -228,14 +228,14 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Table 9, fifteen splits at ten qubits | three runs merged; exact tests by `exact_tenq_tests.py` | `fusion_10q_merged15.json` (its `source_files` key), `fusion_10q_confirmatory10.json`, `corrected/tenq15_exact_tests.json` |
 | Table 10, Fig. 3, Table A1, member agreement | `analyze_member_agreement.py` | `member_agreement.json` |
 | Table 11, classical baselines | `eval_classical_baseline.py`, `eval_classical_fullfeat.py` | `classical_baseline_200.json`, `classical_baseline_fullfeat_200.json` |
-| Table A2, submitted policies | as Table 12 on `results/replicate_circuits/` | `replicates_structure.json`, `effective_params.json` |
+| Table A2, earlier (submitted-version) policies | as Table 12 on `results/replicate_circuits/` | `replicates_structure.json`, `effective_params.json` |
 | Floor-referenced gate, cost-weight sensitivity | `analyze_revision_scope.py` | `corrected/absolute_floor_gate_all.json`, `corrected/cost_weight_sensitivity_corrected.json` |
 | Reward-loop rescoring | `rescore_reward_loop.py` | `reward_loop_rescoring.json`, `corrected/rescoring_*.json` (only the `"42"` block is the subsample the policies saw) |
 | Accuracy-weighting probe | `probe_qwe_weights.py` | `corrected/qwe_weight_probe.json` |
 | Overlap of reward-loop records with evaluation splits (Section 10.2) | `freeze_revision_config.py` | `corrected/reward_eval_overlap.json` |
 | State fidelity of the linear ZZ variant against the full map (Section 6.2) | `eval_lrsweep.py` | `eval_lrsweep_UNSW_NB15.json` |
 | Submitted policies at the full protocol (Appendix A) | `eval_compression_matched.py` on `results/replicate_circuits/` | `corrected/compression_matched_precorrection_{IoT,UNSW,Bot}.json` |
-| Submitted version's compression arms and transpiler control (Section 6, Appendix A) | `eval_compression_matched.py` | `compression_matched_cmp{IoT,UNSW,Bot}.json` |
+| Earlier (submitted-version) compression arms and transpiler control (Section 6, Appendix A) | `eval_compression_matched.py` | `compression_matched_cmp{IoT,UNSW,Bot}.json` |
 | Supplement tables as LaTeX and statistics | `scripts/analyze_supplement.py` | `supplement/summary_supplement.json`, `supplement/tex/*.tex` |
 | Manuscript tables as LaTeX | `scripts/make_revision_tables.py` | `corrected/tex/*.tex` |
 | Whole campaigns, unattended | `scripts/run_revision.sh`, `scripts/run_supplement.sh` | `results/corrected/`, `results/supplement/` (protocols frozen before launch) |

@@ -49,9 +49,9 @@ the source circuit.}
 \setlength{\tabcolsep}{2pt}
 \begin{tabular}{@{}llcccrcll@{}}
 \toprule
-Arm & Seed & $g_2$ per member & Total & Reduction & Distinct & Effective & Warm-up & Substituted \\
+Arm & Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Effective & Warm-up & Substituted \\
 \midrule
-Uncompressed & n/a & $0/60/30$ & $90$ & $0\%$ & $3$ & $18/18$ & no & none \\
+Uncompressed & n/a & $0/60/30$ & $90$ & $0.0\%$ & $3$ & $18/18$ & no & none \\
 Hand-designed linear & n/a & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & no & none \\
 Supervised warm-up & 42 & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & no & none \\
 \midrule
@@ -223,7 +223,7 @@ tl=tl[:-1]
 w("table_tau_widths.tex", r"""\begin{table}[t]
 \centering
 \caption{Matthews correlation coefficient of the noise-aware rule against the gate threshold
-$\tau$ at eight and ten qubits on all three datasets under the hardware-realistic
+$\tau$ at eight and ten qubits on all three datasets under the realistic
 family, mean over five splits. Cells
 that differ from the $\tau = 0.05$ column are in bold. Majority voting and the shallow
 member alone are given for reference.}
@@ -231,7 +231,7 @@ member alone are given for reference.}
 \footnotesize
 \begin{tabular}{@{}lrrrrrrrr@{}}
 \toprule
-Width, dataset & $p_2$ & $\tau = 0.01$ & $0.02$ & $0.05$ & $0.1$ & $0.2$ & QVE3 & $Z$ alone \\
+Width, dataset & $p_2$ & $\tau = 0.01$ & $0.02$ & $0.05$ & $0.1$ & $0.2$ & QVE3 & $Z$ \\
 \midrule
 """ + "\n".join(tl) + r"""
 \bottomrule

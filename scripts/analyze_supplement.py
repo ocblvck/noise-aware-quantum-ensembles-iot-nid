@@ -117,17 +117,17 @@ def tex_s1(R):
     (TEX / "table_s1_splits5to14.tex").write_text(r"""\begin{table}[t]
 \centering
 \caption{Matthews correlation coefficient, mean and sample standard deviation, on the ten
-confirmation splits (data-split seeds 5 to 14) at six qubits under the coupled family,
+confirmation splits (data splits 5 to 14) at six qubits under the coupled family,
 run under the protocol of Table~\ref{tab:fusion6q} after the five-split result was known
 and reported separately from splits 0 to 4; wins, ties and losses of the noise-aware rule against majority voting; exact
 two-sided Wilcoxon $p$ with tied pairs dropped, and Holm correction across the six
-non-zero levels of a dataset.}
+non-zero levels of a dataset; $p$-values are printed to four decimals.}
 \label{tab:s1splits}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
-Dataset & $p_1$ & QVE3 & QWE3 & NWE3 & W/T/L & $p$ & Holm \\
+Dataset & $p_1$ & QVE3 & QWE3 & NWE3 & W/T/L & $p$ & Holm $p$ \\
 \midrule
 """ + body + r"""
 \bottomrule
@@ -174,8 +174,8 @@ def tex_s3(R):
     (TEX / "table_s3_structure.tex").write_text(r"""\begin{table}[t]
 \centering
 \caption{Two-qubit gate counts, distinct members and effective parameters of the committees
-emitted at the confirmatory learning rate when the reward subsample is drawn with the
-training seed instead of the fixed seed 42. Seed 42 is the run of
+emitted at the confirmatory learning rate ($5\times10^{-6}$) when the reward subsample
+is drawn with the training seed instead of the fixed seed 42. Seed 42 is the run of
 Table~\ref{tab:compstructure} whose reward seed already equals its training seed.
 ``Warm-up circuit'' marks committees whose two entangling members are byte-identical to
 the linear-entanglement Pauli circuit that the supervised warm-up teaches. The $Z$ member
@@ -214,7 +214,7 @@ and the hand-designed substitution, coupled family, six qubits.}
 \toprule
 & & \multicolumn{3}{c}{QVE3, majority voting} & \multicolumn{3}{c}{NWE3, noise-aware} \\
 \cmidrule(lr){3-5}\cmidrule(lr){6-8}
-Dataset & $p_1$ & seeded & shared & linear & seeded & shared & linear \\
+Dataset & $p_1$ & seeded & shared & hand-designed & seeded & shared & hand-designed \\
 \midrule
 """ + "\n".join(L[:-1]) + r"""
 \bottomrule

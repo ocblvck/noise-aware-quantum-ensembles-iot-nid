@@ -1,17 +1,17 @@
 \begin{table}[t]
 \centering
 \caption{Matthews correlation coefficient, mean and sample standard deviation, on the ten
-confirmation splits (data-split seeds 5 to 14) at six qubits under the coupled family,
+confirmation splits (data splits 5 to 14) at six qubits under the coupled family,
 run under the protocol of Table~\ref{tab:fusion6q} after the five-split result was known
 and reported separately from splits 0 to 4; wins, ties and losses of the noise-aware rule against majority voting; exact
 two-sided Wilcoxon $p$ with tied pairs dropped, and Holm correction across the six
-non-zero levels of a dataset.}
+non-zero levels of a dataset; $p$-values are printed to four decimals.}
 \label{tab:s1splits}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
-Dataset & $p_1$ & QVE3 & QWE3 & NWE3 & W/T/L & $p$ & Holm \\
+Dataset & $p_1$ & QVE3 & QWE3 & NWE3 & W/T/L & $p$ & Holm $p$ \\
 \midrule
 \multirow{7}{*}{IoTID20}
  & $0$ & $0.690 \pm 0.085$ & $0.690 \pm 0.085$ & $0.690 \pm 0.085$ & $0/10/0$ & n/a & n/a \\
