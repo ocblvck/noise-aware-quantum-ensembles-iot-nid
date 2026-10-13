@@ -116,10 +116,10 @@ def tex_s1(R):
     body = "\n".join(L[:-1])
     (TEX / "table_s1_splits5to14.tex").write_text(r"""\begin{table}[t]
 \centering
-\caption{Six-qubit coupled family on the ten confirmation splits (data-split seeds 5 to
-14), run under the protocol of Table~\ref{tab:fusion6q} after the five-split result was
-known and reported separately from splits 0 to 4. Mean and sample standard deviation of the Matthews
-correlation; wins, ties and losses of the noise-aware rule against majority voting; exact
+\caption{Matthews correlation coefficient, mean and sample standard deviation, on the ten
+confirmation splits (data-split seeds 5 to 14) at six qubits under the coupled family,
+run under the protocol of Table~\ref{tab:fusion6q} after the five-split result was known
+and reported separately from splits 0 to 4; wins, ties and losses of the noise-aware rule against majority voting; exact
 two-sided Wilcoxon $p$ with tied pairs dropped, and Holm correction across the six
 non-zero levels of a dataset.}
 \label{tab:s1splits}
@@ -145,9 +145,9 @@ def tex_s2(R):
         L.append("\\midrule")
     (TEX / "table_s2_device.tex").write_text(r"""\begin{table}[t]
 \centering
-\caption{Fusion rules at six qubits under device-derived noise models built from the
-calibration snapshots of six seven-qubit processors, in simulation, over five splits.
-Matthews correlation, mean; wins, ties and losses of the noise-aware rule against majority
+\caption{Matthews correlation coefficient, mean over five splits, of the three fusion rules at
+six qubits under device-derived noise models built from the calibration snapshots of
+six seven-qubit processors, in simulation; wins, ties and losses of the noise-aware rule against majority
 voting. The kernel is measurement-free, so readout error and shot noise are excluded.}
 \label{tab:s2device}
 \footnotesize
@@ -173,8 +173,9 @@ def tex_s3(R):
         L.append(f"{seed} & ${pm}$ & ${v['total_2q']}$ & ${v['reduction_pct']:.1f}\\%$ & ${v['distinct_members']}$ & {same} & ${eff}/18$ \\\\")
     (TEX / "table_s3_structure.tex").write_text(r"""\begin{table}[t]
 \centering
-\caption{Committees emitted at the confirmatory learning rate when the reward subsample
-is drawn with the training seed instead of the fixed seed 42. Seed 42 is the run of
+\caption{Two-qubit gate counts, distinct members and effective parameters of the committees
+emitted at the confirmatory learning rate when the reward subsample is drawn with the
+training seed instead of the fixed seed 42. Seed 42 is the run of
 Table~\ref{tab:compstructure} whose reward seed already equals its training seed.
 ``Warm-up circuit'' marks committees whose two entangling members are byte-identical to
 the linear-entanglement Pauli circuit that the supervised warm-up teaches. The $Z$ member
@@ -202,8 +203,8 @@ Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Warm-up circuit &
         L.append("\\midrule")
     (TEX / "table_s3_downstream.tex").write_text(r"""\begin{table}[t]
 \centering
-\caption{Downstream Matthews correlation of the reward-seeded committees (mean over
-policy seeds 43 to 46 and over five data splits) next to the shared-subsample committees
+\caption{Matthews correlation coefficient of the reward-seeded committees (mean over policy
+seeds 43 to 46 and over five data splits) next to the shared-subsample committees
 of Tables~\ref{tab:compdownstream} and~\ref{tab:compdownstream-nwe} (seeds 42 to 46)
 and the hand-designed substitution, coupled family, six qubits.}
 \label{tab:s3downstream}

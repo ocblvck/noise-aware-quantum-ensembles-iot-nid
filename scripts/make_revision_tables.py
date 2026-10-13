@@ -35,9 +35,9 @@ for lr,lrtex in LRS:
 body=body[:-1]
 t2 = r"""\begin{table}[t]
 \centering
-\caption{Committee structure after compression at six qubits under the corrected
-objective, every learning rate at five training seeds. Two-qubit gate counts are given
-per member in the order $Z$, $ZZ$, Pauli. ``Distinct'' counts how many of the three
+\caption{Two-qubit gate counts, distinct members and effective parameters of the committees
+emitted at six qubits under the corrected objective, every learning rate at five training
+seeds. Two-qubit gate counts are given per member in the order $Z$, $ZZ$, Pauli. ``Distinct'' counts how many of the three
 members are still different circuits. ``Effective'' counts the parameters passing the
 perturbation test of \eqref{eq:effective}, which every policy was trained against.
 ``Warm-up'' marks committees whose two entangling members are byte-identical to the
@@ -72,8 +72,9 @@ for lr,lrtex in LRS:
         pb.append("GRPO %s & %d & $%s$ & $%d$ & $%.1f\\%%$ & $%d$ & %s \\\\" % (lrtex, s, g2, v["total_2q"], v["reduction_pct"], v["distinct_members"], ecell))
 w("table2_pre.tex", r"""\begin{table}[t]
 \centering
-\caption{The earlier policies, trained against the structural criterion
-alone with an accuracy-retention reward on a 16/8 subsample (sixteen training and eight
+\caption{Two-qubit gate counts, distinct members and effective parameters of the committees
+emitted by the earlier policies, trained against the structural criterion alone with an
+accuracy-retention reward on a 16/8 subsample (sixteen training and eight
 test records), and audited after training with \eqref{eq:effective}. The seed-43 policy at the lowest rate is the one that satisfied the
 structural criterion while leaving ten of eighteen parameters inert.}
 \label{tab:compstructure-pre}
@@ -109,8 +110,9 @@ for rule,label,suffix,cap in (("QVE3","majority voting","", "under majority voti
 \centering
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
-\caption{Downstream Matthews correlation of the corrected policies at six qubits under
-the coupled family, matched protocol (200/400, five data splits), """ + cap + r""".
+\caption{Matthews correlation coefficient of the committees emitted by the corrected policies at
+six qubits under the coupled family, matched protocol (200/400, five data splits),
+""" + cap + r""".
 Learned rows give the mean over five policy seeds with the standard deviation across
 seeds in parentheses; each seed's value is itself a mean over the five data splits.
 Per-seed values are in the repository.}
@@ -152,8 +154,9 @@ for tag,(dsf,dsn) in DS.items():
 cs=cs[:-1]
 w("table_csweep.tex", r"""\begin{table}[t]
 \centering
-\caption{Sensitivity to the support-vector regularization constant, six qubits, coupled
-family, on the same Gram matrices. Matthews correlation, mean over five splits. The
+\caption{Matthews correlation coefficient against the support-vector regularization constant
+$C$ at six qubits under the coupled family, mean over five splits, for each entangling
+member and for majority voting and the noise-aware rule on the same Gram matrices. The
 article's tables use $C = 1$, fixed in advance. Off-diagonal spreads at $p_1 = 0.01$ are
 $10^{-5}$ to $3\times10^{-5}$ for $ZZ$ and $6\times10^{-4}$ to $2\times10^{-3}$ for Pauli.}
 \label{tab:csweep}
@@ -185,8 +188,9 @@ for wq in (8,10):
 rl=rl[:-1]
 w("table_realistic_all.tex", r"""\begin{table}[t]
 \centering
-\caption{Fusion rules at hardware-realistic error rates, $p_1 = 5\times10^{-4}$, on all
-three datasets, matched protocol over five splits. The noise-aware value is bold where it
+\caption{Matthews correlation coefficient at hardware-realistic error rates
+($p_1 = 5\times10^{-4}$) at eight and ten qubits on all three datasets, matched
+protocol over five splits, for the three fusion rules and each member. The noise-aware value is bold where it
 exceeds majority voting and underlined where it falls below it.}
 \label{tab:fusionrealistic}
 \begin{tabular}{@{}lrrrrrrr@{}}
@@ -218,8 +222,9 @@ for wq in (8,10):
 tl=tl[:-1]
 w("table_tau_widths.tex", r"""\begin{table}[t]
 \centering
-\caption{Sensitivity of the noise-aware rule to $\tau$ at eight and ten qubits on all
-three datasets, hardware-realistic family, Matthews correlation over five splits. Cells
+\caption{Matthews correlation coefficient of the noise-aware rule against the gate threshold
+$\tau$ at eight and ten qubits on all three datasets under the hardware-realistic
+family, mean over five splits. Cells
 that differ from the $\tau = 0.05$ column are in bold. Majority voting and the shallow
 member alone are given for reference.}
 \label{tab:tauwidth}
