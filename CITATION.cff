@@ -6,6 +6,9 @@ authors:
   - family-names: Okekeogbu
     given-names: Chibuike C.
     affiliation: "North Carolina Agricultural and Technical State University"
+    orcid: "https://orcid.org/0009-0001-6561-5159"
+version: "1.1-final"
+doi: 10.5281/zenodo.23268715
 repository-code: "https://github.com/ocblvck/noise-aware-quantum-ensembles-iot-nid"
 license: MIT
 preferred-citation:
@@ -14,9 +17,11 @@ preferred-citation:
   authors:
     - family-names: Okekeogbu
       given-names: Chibuike C.
+      orcid: "https://orcid.org/0009-0001-6561-5159"
     - family-names: Mostafa
       given-names: Sayed A.
     - family-names: Patooghy
       given-names: Ahmad
+      orcid: "https://orcid.org/0000-0003-2647-2797"
   year: 2026
   notes: "Under revision at SN Computer Science (special issue arising from the AQ-QCAS workshop at DCAS 2026); extended version of the DCAS 2026 paper."

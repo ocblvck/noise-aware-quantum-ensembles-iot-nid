@@ -1,0 +1,23 @@
+{
+  "title": "Noise-aware quantum ensembles and learned feature-map compression (taqcc)",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Okekeogbu, Chibuike C.",
+      "affiliation": "North Carolina Agricultural and Technical State University",
+      "orcid": "0009-0001-6561-5159"
+    }
+  ],
+  "description": "<p>Code, cached circuits and result files behind every table and figure of the article \"Noise-Aware Fusion of Quantum Kernel Ensembles for IoT Intrusion Detection\" by C. C. Okekeogbu, S. A. Mostafa and A. Patooghy (SN Computer Science, under revision; extended from the DCAS 2026 paper, doi 10.1109/DCAS69364.2026.11544356). scripts/verify_paper_numbers.py rechecks all 832 published values against the result files. Tag v1.1-final differs from v1.1-revision only in documentation and two table captions; no result file changed.</p><p>Funding: the work is supported in part by the National Science Foundation through grant No. 2619039.</p>",
+  "keywords": [
+    "quantum kernel",
+    "quantum machine learning",
+    "ensemble learning",
+    "noise",
+    "IoT intrusion detection",
+    "circuit compression",
+    "reinforcement learning"
+  ]
+}

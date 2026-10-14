@@ -312,9 +312,12 @@ results/            see section 3
   cells that matter most. Result files do not embed a git commit; `job_records.jsonl`
   records the commit of each queued job from 15 September 2026 onward. No scientific
   source file changed between commit `07c2ab7` and the end of the revision campaign.
-- **Archive.** The state reported in the revised article is tagged `v1.1-revision`. A
-  permanent archive of that tag is planned (Zenodo). No DOI exists yet, and none is
-  claimed until it does.
+- **Archive.** The repository is archived on Zenodo under the concept DOI
+  10.5281/zenodo.23268715, which always resolves to the latest archived version. The
+  state first reported to the journal is tagged `v1.1-revision` (version DOI
+  10.5281/zenodo.23268716); the final state for the resubmission, which changes only
+  documentation and two table captions, is tagged `v1.1-final`. No result file differs
+  between the two tags.
 
 ## Citation
 
@@ -331,6 +334,11 @@ Learning Models for IoT Intrusion Detection," in 2026 IEEE 19th Dallas Circuits 
 Systems Conference (DCAS), 2026, pp. 1-6, doi: 10.1109/DCAS69364.2026.11544356.
 
 A machine-readable citation is in `CITATION.cff`.
+
+## Funding
+
+The work is supported in part by the National Science Foundation through grant
+No. 2619039.
 
 ## License
 
