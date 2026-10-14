@@ -316,8 +316,8 @@ results/            see section 3
   10.5281/zenodo.23268715, which always resolves to the latest archived version. The
   state first reported to the journal is tagged `v1.1-revision` (version DOI
   10.5281/zenodo.23268716); the final state for the resubmission, which changes only
-  documentation and two table captions, is tagged `v1.1-final`. No result file differs
-  between the two tags.
+  documentation and two table captions, is tagged `v1.1-final` (version DOI
+  10.5281/zenodo.23374517). No result file differs between the two tags.
 
 ## Citation
 
