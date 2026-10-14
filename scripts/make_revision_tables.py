@@ -111,10 +111,10 @@ for rule,label,suffix,cap in (("QVE3","majority voting","", "under majority voti
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
 \caption{Matthews correlation coefficient of the committees emitted by the corrected policies at
-six qubits under the coupled family, matched protocol (200/400, five data splits),
+six qubits under the coupled family, matched protocol (200 training and 400 test records, five data splits),
 """ + cap + r""".
-Learned rows give the mean over five policy seeds with the standard deviation across
-seeds in parentheses; each seed's value is itself a mean over the five data splits.
+Learned rows give the mean over five policy seeds with the across-seed standard deviation in
+parentheses; each seed's value is a mean over the five data splits.
 Per-seed values are in the repository.}
 \label{tab:compdownstream""" + suffix + r"""}
 \begin{tabular}{@{}llrrrrr@{}}
